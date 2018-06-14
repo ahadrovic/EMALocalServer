@@ -87,5 +87,50 @@ router.delete('/employees',function(req,res,next) {
 
 });
 
+var products = [
+  { "name": "Test product", "price": 100 }
+];
+
+router.get('/ping', function(req, res) {
+  res.send({ "status": "pong" })
+})
+
+router.post('/login', function(req, res) {
+  if (req.body.email === "test@ssst.ba" && req.body.pass === "pass") {
+    res.send({"status": "valid"})
+  } else {
+    res.send({"status": "invalid"})
+  }
+})
+
+router.post('/register', function(req, res) {
+  if (req.body.email === "test2@ssst.ba" && req.body.pass === "pass2") {
+    res.send({"status": "valid"})
+  } else {
+    res.send({"status": "invalid"})
+  }
+})
+
+router.get('/products', function(req, res) {
+  res.send(products)
+})
+
+router.get('/products/:id', function(req, res) {
+  res.send(products[req.params.id])
+})
+
+router.delete('/products/:id', function(req, res) {
+  products.splice(req.params.id, 1)
+  res.send({"status": "deleted"})
+})
+
+router.post('/products', function(req, res) {
+  products.push({
+    "name": req.body.name,
+    "price": req.body.price
+  })
+  res.send({"status": "created"})
+})
+
 
 module.exports = router;

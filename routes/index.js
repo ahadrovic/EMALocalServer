@@ -88,11 +88,10 @@ router.delete('/employees',function(req,res,next) {
 });
 
 
-const products = [
+var products = [
   { "name": "Test product", "price": 100 }
 ];
 
-var users = []
 
 app.get('/ping', function(req, res) {
   res.send({ "status": "pong" })

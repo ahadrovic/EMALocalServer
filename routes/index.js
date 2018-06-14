@@ -1,11 +1,40 @@
 var express = require('express');
 var router = express.Router();
 
-/*
-const items = [{"itemName":"iPhone X","itemQuant":11,"itemDesc":"Apple phone"},
-				{"itemName":"Google Pixel","itemQuant":11,"itemDesc":"Google phone"},
-				{"itemName":"Samsung Galaxy S9","itemQuant":11,"itemDesc":"Samsung phone"}]
-*/
+
+var items = [{"itemId": 1, "itemName":"iPhone X","itemQuant":11,"itemDesc":"Apple phone"},
+				{"itemId": 2,"itemName":"Google Pixel","itemQuant":11,"itemDesc":"Google phone"},
+				{"itemId": 3,"itemName":"Samsung Galaxy S9","itemQuant":11,"itemDesc":"Samsung phone"}]
+
+
+router.get('/items', function(req, res, next) {
+  
+  res.json(items)
+
+});
+
+router.post('/items',function(req,res,next) {
+    
+    var newItem = req.body
+	
+	items.push(newItem)
+
+    res.json(req.body)
+
+});
+
+router.delete('/items',function(req,res,next) {
+    
+	var selectedItem = req.body
+
+    items = items.filter(function(index) {
+    	return index.itemId !== selectedItem["itemId"] && index.itemName !== selectedItem["itemName"];
+    });
+
+   	res.json(items)
+
+});
+
 
 var employees = [
 	{
@@ -30,10 +59,6 @@ var employees = [
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
-});
-
-router.get('/items', function(req, res, next) {
-  res.json(items)
 });
 
 router.get('/employees', function(req, res, next) {
@@ -61,6 +86,54 @@ router.delete('/employees',function(req,res,next) {
    	res.json(employees)
 
 });
+
+
+const products = [
+  { "name": "Test product", "price": 100 }
+];
+
+var users = []
+
+app.get('/ping', function(req, res) {
+  res.send({ "status": "pong" })
+})
+
+app.post('/login', function(req, res) {
+  if (req.body.email === "test@ssst.ba" && req.body.pass === "pass") {
+    res.send({"status": "valid"})
+  } else {
+    res.send({"status": "invalid"})
+  }
+})
+
+app.post('/register', function(req, res) {
+  if (req.body.email === "test2@ssst.ba" && req.body.pass === "pass2") {
+    res.send({"status": "valid"})
+  } else {
+    res.send({"status": "invalid"})
+  }
+})
+app.get('/products', function(req, res) {
+  res.send(products)
+})
+
+app.get('/products/:id', function(req, res) {
+  res.send(products[req.params.id])
+})
+
+app.delete('/products/:id', function(req, res) {
+  products.splice(req.params.id, 1)
+  res.send({"status": "deleted"})
+})
+
+app.post('/products', function(req, res) {
+  products.push({
+    "name": req.body.name,
+    "price": req.body.price
+  })
+  res.send({"status": "created"})
+})
+
 
 
 module.exports = router;

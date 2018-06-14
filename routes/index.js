@@ -91,24 +91,77 @@ var products = [
   { "name": "Test product", "price": 100 }
 ];
 
+var users = [
+
+	{
+		"email": "test@ssst.ba",
+		"pass": "pass"
+	}
+
+]
+
 router.get('/ping', function(req, res) {
   res.send({ "status": "pong" })
 })
 
+router.get('/users', function(req, res) {
+  res.json(users)
+})
+
 router.post('/login', function(req, res) {
+  
+/*
   if (req.body.email === "test@ssst.ba" && req.body.pass === "pass") {
     res.send({"status": "valid"})
   } else {
     res.send({"status": "invalid"})
   }
+*/
+  
+  var foundUser = users.find(function(user){
+  		return user.email === req.body.email && user.pass === req.body.pass
+  })
+
+  if(foundUser == null){
+  	
+  	res.send({"status": "invalid"})
+  	
+  }
+  else{
+  	
+  	res.send({"status": "valid"})	
+
+  }
+
 })
 
 router.post('/register', function(req, res) {
+  
+/*
   if (req.body.email === "test2@ssst.ba" && req.body.pass === "pass2") {
     res.send({"status": "valid"})
   } else {
     res.send({"status": "invalid"})
   }
+*/
+
+  var foundUser = users.find(function(user){
+  		return user.email === req.body.email && user.pass === user.pass
+  })
+
+  if(foundUser == null){
+  	
+  	users.push({"email":req.body.email,"pass":req.body.pass})
+  	
+  	res.send({"status": "valid"})	
+
+  }
+  else{
+
+  	res.send({"status": "invalid"})
+
+  }
+	
 })
 
 router.get('/products', function(req, res) {

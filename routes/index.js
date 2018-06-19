@@ -202,7 +202,7 @@ router.get('/interests', function(req, res) {
 router.post('/interests', function(req, res) {
 
   for(var interest in req.body.chosenInterests){
-  	interests.push(interest[0])	
+  	interests.push(interest[1])	
   }  	
   
 

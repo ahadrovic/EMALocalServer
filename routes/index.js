@@ -200,12 +200,8 @@ router.get('/interests', function(req, res) {
 })
 
 router.post('/interests', function(req, res) {
-  
-  for(i in req.body.chosenInterests){
   	
-  	interests.push(i)
-
-  }
+  interests.push(req.body.chosenInterests)
 
   res.json(interests)
 

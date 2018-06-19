@@ -222,11 +222,8 @@ router.delete('/places/:id', function(req, res) {
 
 router.post('/places', function(req, res) {
   
-  for(p in req.body.storedPlaces){
-  	
-  	googlePlaces.push(p)
-
-  }
+ 
+  googlePlaces.push(req.body.storedPlaces)
 
   res.send({"status": "created"})
 

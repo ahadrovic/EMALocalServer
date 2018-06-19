@@ -200,12 +200,8 @@ router.get('/interests', function(req, res) {
 })
 
 router.post('/interests', function(req, res) {
-
-  for(var interest in req.body.chosenInterests){
-  	interests.push(interest[1])	
-  }  	
-  
-
+  	
+  interests.push(req.body.chosenInterests)
 
   res.json(interests)
 
@@ -226,10 +222,8 @@ router.delete('/places/:id', function(req, res) {
 
 router.post('/places', function(req, res) {
   	
-  for(var place in req.body.storedPlaces){
-  	googlePlaces.push(place[0])
-  }  	
-  
+ 
+  googlePlaces.push(req.body.storedPlaces)
 
   res.send({"status": "created"})
 

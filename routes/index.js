@@ -186,8 +186,6 @@ router.post('/products', function(req, res) {
 })
 
 
-
-
 var googlePlaces = []
 
 var savedPlaces = []
@@ -201,7 +199,9 @@ router.get('/interests', function(req, res) {
 
 router.post('/interests', function(req, res) {
   	
-  interests.push(req.body.chosenInterests)
+  for (var i = req.body.chosenInterests.length - 1; i >= 0; i--) {
+  	interests.push(req.body.chosenInterests[i])
+  }
 
   res.json(interests)
 
@@ -230,11 +230,11 @@ router.post('/places', function(req, res) {
 })
 
 
-router.get('/places_saved', function(req, res) {
+router.get('/savedPlaces', function(req, res) {
   res.json(savedPlaces)
 })
 
-router.get('/places_saved', function(req, res) {
+router.get('/savedPlaces', function(req, res) {
   
   var foundPlace = savedPlaces.find(function(place){
   		return place.placeLatitude == req.body.checkedPlace.placeLatitude && place.placeLongitude == req.body.checkedPlace.placeLongitude
@@ -252,7 +252,7 @@ router.get('/places_saved', function(req, res) {
   }
 })
 
-router.delete('/places_saved/:id', function(req, res) {
+router.delete('/savedPlaces/:id', function(req, res) {
   savedPlaces.splice(req.params.id, 1)
   res.send({"status": "deleted"})
 })
@@ -261,12 +261,24 @@ router.post('/places_saved', function(req, res) {
   
  
   var foundPlace = savedPlaces.find(function(place){
-  		return place.placeLatitude == req.body.checkedPlace.placeLatitude && place.placeLongitude == req.body.checkedPlace.placeLongitude
+  		return place.placeLatitude == req.body.placeLatitude && place.placeLongitude == req.body.placeLongitude
   })
 
   if(foundPlace == null){
   	
-  	savedPlaces.push(req.body.checkedPlace)
+  	var newPlace = {
+
+  		"placeName": req.body.placeName,
+  		"placeAddress": req.body.placeAddress,
+  		"placeRating": req.body.placeRating,
+  		"placeLatitude": req.body.placeLatitude,
+  		"placeLongitude": req.body.placeLongitude,
+  		"placePriceLevel": req.body.placePriceLevel,
+  		"saved": req.body.saved,
+  	}
+  	
+  	savedPlaces.push(newPlace)
+
     res.send({"status": "valid"})
   	
   }

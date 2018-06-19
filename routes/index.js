@@ -237,7 +237,7 @@ router.get('/places_saved', function(req, res) {
 router.get('/places_saved', function(req, res) {
   
   var foundPlace = savedPlaces.find(function(place){
-  		return place.placeLatitude == req.body.checkedPlace.placeLatitude && place.placeLongitude == req.body.checkedPlace.placeLongitude && place.saved == req.body.checkedPlace.saved
+  		return place.placeLatitude == req.body.checkedPlace.placeLatitude && place.placeLongitude == req.body.checkedPlace.placeLongitude
   })
 
   if(foundPlace == null){
@@ -261,7 +261,7 @@ router.post('/places_saved', function(req, res) {
   
  
   var foundPlace = savedPlaces.find(function(place){
-  		return place.placeLatitude == req.body.checkedPlace.placeLatitude && place.placeLongitude == req.body.checkedPlace.placeLongitude && place.saved == req.body.checkedPlace.saved
+  		return place.placeLatitude == req.body.checkedPlace.placeLatitude && place.placeLongitude == req.body.checkedPlace.placeLongitude
   })
 
   if(foundPlace == null){

@@ -200,8 +200,12 @@ router.get('/interests', function(req, res) {
 })
 
 router.post('/interests', function(req, res) {
-  	
-  interests.push(req.body.chosenInterests)
+
+  for(var interest in req.body.chosenInterests){
+  	interests.push(interest)	
+  }  	
+  
+
 
   res.json(interests)
 
@@ -221,9 +225,11 @@ router.delete('/places/:id', function(req, res) {
 })
 
 router.post('/places', function(req, res) {
+  	
+  for(var place in req.body.storedPlaces){
+  	googlePlaces.push(place)
+  }  	
   
- 
-  googlePlaces.push(req.body.storedPlaces)
 
   res.send({"status": "created"})
 
@@ -234,36 +240,18 @@ router.get('/places_saved', function(req, res) {
   res.json(savedPlaces)
 })
 
-router.get('/places_saved', function(req, res) {
-  
-  var foundPlace = savedPlaces.find(function(place){
-  		return place.placeLatitude == req.body.checkedPlace.placeLongitude && place.placeLongitude == req.body.checkedPlace.saved && place.saved == req.body.checkedPlace.saved
-  })
-
-  if(foundPlace == null){
-  	
-  	res.send({"status": "not found"})	
-  	
-  }
-
-  else{
-  	res.send({"status": "found"})
-  	
-  }
-})
 
 router.delete('/places_saved/:id', function(req, res) {
+
   savedPlaces.splice(req.params.id, 1)
   res.send({"status": "deleted"})
+
 })
 
 router.post('/places_saved', function(req, res) {
-  
-  
-
 
   var foundPlace = savedPlaces.find(function(place){
-  		return place.placeLatitude == req.body.checkedPlace.placeLongitude && place.placeLongitude == req.body.checkedPlace.saved && place.saved == req.body.checkedPlace.saved
+  		return place.placeLatitude == req.body.checkedPlace.placeLatitude && place.placeLongitude == req.body.checkedPlace.placeLongitude && place.saved == req.body.checkedPlace.saved
   })
 
   if(foundPlace == null){

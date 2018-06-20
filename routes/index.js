@@ -101,8 +101,8 @@ var carts =
 			"id":1,
 			"items":[
 
-				{"item":{ "name": "Shoes", "price": 100} ,"quant":1,"description":"Running shoes"},
-				{"item":{ "name": "T-Shirt", "price": 50}, "quant":2,"description":"Plain white T"}		
+				{"item":{ "name": "Shoes", "price": 100, "description":"Running shoes"} ,"quant":1},
+				{"item":{ "name": "T-Shirt", "price": 50,"description":"Plain white T"}, "quant":2}		
 
 			],
 

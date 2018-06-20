@@ -257,15 +257,15 @@ router.delete('/savedPlaces/:id', function(req, res) {
   res.send({"status": "deleted"})
 })
 
-router.post('/places_saved', function(req, res) {
+router.post('/savedPlaces', function(req, res) {
   
  
   var foundPlace = savedPlaces.find(function(place){
-  		return place.placeLatitude == req.body.newPlace.placeLatitude && place.placeLongitude == req.body.newPlace.placeLongitude
+  		return place.placeLatitude == req.body.placeLatitude && place.placeLongitude == req.body.placeLongitude
   })
 
   if(foundPlace == null){
-  	/*
+  	
   	var newPlace = {
 
   		"placeName": req.body.placeName,
@@ -276,18 +276,16 @@ router.post('/places_saved', function(req, res) {
   		"placePriceLevel": req.body.placePriceLevel,
   		"saved": req.body.saved,
   	}
-  	*/
-  	savedPlaces.push(req.body.newPlace)
-  	res.send(req.body.newPlace)
+  	
+  	savedPlaces.push(newPlace)
 
-    //res.json({"status": "valid"})
-
+    res.send({"status": "valid"})
   	
   }
 
   else{
 
-  	res.json({"status": "invalid"})
+  	res.send({"status": "invalid"})
   	
   }
 

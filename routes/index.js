@@ -203,7 +203,8 @@ router.delete('/products/:id', function(req, res) {
 router.post('/products', function(req, res) {
   products.push({
     "name": req.body.name,
-    "price": req.body.price
+    "price": req.body.price,
+    "description": req.body.description
   })
   res.send({"status": "created"})
 })

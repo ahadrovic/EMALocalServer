@@ -234,6 +234,7 @@ router.get('/savedPlaces', function(req, res) {
   res.send(savedPlaces)
 })
 
+/*
 router.get('/savedPlaces', function(req, res) {
   
   var foundPlace = savedPlaces.find(function(place){
@@ -251,6 +252,7 @@ router.get('/savedPlaces', function(req, res) {
   	
   }
 })
+*/
 
 router.delete('/savedPlaces/:id', function(req, res) {
   savedPlaces.splice(req.params.id, 1)

@@ -231,7 +231,7 @@ router.post('/places', function(req, res) {
 
 
 router.get('/savedPlaces', function(req, res) {
-  res.json(savedPlaces)
+  res.send(savedPlaces)
 })
 
 router.get('/savedPlaces', function(req, res) {
@@ -261,11 +261,11 @@ router.post('/places_saved', function(req, res) {
   
  
   var foundPlace = savedPlaces.find(function(place){
-  		return place.placeLatitude == req.body.placeLatitude && place.placeLongitude == req.body.placeLongitude
+  		return place.placeLatitude == req.body.newPlace.placeLatitude && place.placeLongitude == req.body.newPlace.placeLongitude
   })
 
   if(foundPlace == null){
-  	
+  	/*
   	var newPlace = {
 
   		"placeName": req.body.placeName,
@@ -276,16 +276,18 @@ router.post('/places_saved', function(req, res) {
   		"placePriceLevel": req.body.placePriceLevel,
   		"saved": req.body.saved,
   	}
-  	
-  	savedPlaces.push(newPlace)
+  	*/
+  	savedPlaces.push(req.body.newPlace)
+  	res.send(req.body.newPlace)
 
-    res.send({"status": "valid"})
+    //res.json({"status": "valid"})
+
   	
   }
 
   else{
 
-  	res.send({"status": "invalid"})
+  	res.json({"status": "invalid"})
   	
   }
 

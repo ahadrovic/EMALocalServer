@@ -89,8 +89,8 @@ router.delete('/employees',function(req,res,next) {
 
 var products = [
 
-  { "id": 1, "name": "Shoes", "price": 100},
-  { "id":2, "name": "T-Shirt", "price": 50}
+  { "id": 1, "name": "Shoes", "price": 100,"description":"Running shoes"},
+  { "id":2, "name": "T-Shirt", "price": 50,"description":"Plain white T"}
 
 ];
 
@@ -101,8 +101,8 @@ var carts =
 			"id":1,
 			"items":[
 
-				{"item":{ "name": "Shoes", "price": 100} ,"quant":1},
-				{"item":{ "name": "T-Shirt", "price": 50}, "quant":2}		
+				{"item":{ "name": "Shoes", "price": 100} ,"quant":1,"description":"Running shoes"},
+				{"item":{ "name": "T-Shirt", "price": 50}, "quant":2,"description":"Plain white T"}		
 
 			],
 
@@ -226,6 +226,12 @@ router.delete('/cart/:id',function(req,res) {
 	carts.splice(req.params.id, 1)
     res.send({"status": "deleted"})
     
+});
+
+router.get('/carts',function(req,res) {
+  
+    res.json(carts)
+
 });
 
 

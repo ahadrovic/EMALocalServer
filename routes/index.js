@@ -90,7 +90,7 @@ router.delete('/employees',function(req,res,next) {
 var products = [
 
   { "id": 1, "name": "Shoes", "price": 100,"description":"Running shoes"},
-  { "id":2, "name": "T-Shirt", "price": 50,"description":"Plain white T"}
+  { "id": 2, "name": "T-Shirt", "price": 50,"description":"Plain white T"}
 
 ];
 
@@ -101,8 +101,8 @@ var carts =
 			"id":1,
 			"items":[
 
-				{"item":{ "name": "Shoes", "price": 100, "description":"Running shoes"} ,"quant":1},
-				{"item":{ "name": "T-Shirt", "price": 50,"description":"Plain white T"}, "quant":2}		
+				{"item":{ "id":1, "name": "Shoes", "price": 100, "description":"Running shoes"} ,"quant":1},
+				{"item":{ "id":2, "name": "T-Shirt", "price": 50,"description":"Plain white T"}, "quant":2}		
 
 			],
 
@@ -200,8 +200,11 @@ router.delete('/products/:id', function(req, res) {
   res.send({"status": "deleted"})
 })
 
+
+
 router.post('/products', function(req, res) {
   products.push({
+    "id": req.body.id,
     "name": req.body.name,
     "price": req.body.price,
     "description": req.body.description

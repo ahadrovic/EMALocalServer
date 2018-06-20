@@ -88,8 +88,31 @@ router.delete('/employees',function(req,res,next) {
 });
 
 var products = [
-  { "name": "Test product", "price": 100 }
+
+  { "id": 1, "name": "Shoes", "price": 100},
+  { "id":2, "name": "T-Shirt", "price": 50}
+
 ];
+
+var carts = 
+
+	[	
+		{
+			"id":1,
+			"items":[
+
+				{"item":{ "name": "Shoes", "price": 100} ,"quant":1},
+				{"item":{ "name": "T-Shirt", "price": 50}, "quant":2}		
+
+			],
+
+			"total": 200
+
+		}
+	];
+	
+
+
 
 var users = [
 
@@ -184,6 +207,29 @@ router.post('/products', function(req, res) {
   })
   res.send({"status": "created"})
 })
+
+
+router.get('/cart/:id',function(req,res) {
+    var foundCart = carts.find(function(cart){
+  		return cart.id == req.params.id
+  })
+
+    res.json(foundCart)
+
+});
+
+router.post('/cart',function(req,res) {
+    carts.append(req.body.newCart)
+});
+
+router.delete('/cart/:id',function(req,res) {
+	carts.splice(req.params.id, 1)
+    res.send({"status": "deleted"})
+    
+});
+
+
+
 
 
 var googlePlaces = []

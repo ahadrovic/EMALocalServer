@@ -224,6 +224,7 @@ router.get('/cart/:id',function(req,res) {
 
 router.post('/cart',function(req,res) {
     carts.append(req.body.newCart)
+    res.send({"status":"created"})
 });
 
 router.delete('/cart/:id',function(req,res) {

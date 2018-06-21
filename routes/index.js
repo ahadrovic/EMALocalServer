@@ -222,8 +222,18 @@ router.get('/cart/:id',function(req,res) {
 
 });
 
+
 router.post('/cart',function(req,res) {
-    carts.append(req.body.newCart)
+    
+  var newCart = {
+
+    "id": req.body.id,
+    "items": req.body.items
+    "total": req.body.total
+
+  }
+
+    carts.append(newCart)
     res.send({"status":"created"})
 });
 

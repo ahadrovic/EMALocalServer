@@ -233,7 +233,7 @@ router.post('/cart',function(req,res) {
 
   }
 
-    carts.append(newCart)
+    carts.push(newCart)
     res.json({"status":"created"})
 });
 

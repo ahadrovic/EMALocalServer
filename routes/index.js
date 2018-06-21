@@ -228,7 +228,7 @@ router.post('/cart',function(req,res) {
   var newCart = {
 
     "id": req.body.id,
-    "items": req.body.items
+    "items": req.body.items,
     "total": req.body.total
 
   }

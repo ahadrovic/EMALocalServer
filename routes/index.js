@@ -209,7 +209,7 @@ router.post('/products', function(req, res) {
     "price": req.body.price,
     "description": req.body.description
   })
-  res.send({"status": "created"})
+  res.json({"status": "created"})
 })
 
 
@@ -234,7 +234,7 @@ router.post('/cart',function(req,res) {
   }
 
     carts.append(newCart)
-    res.send({"status":"created"})
+    res.json({"status":"created"})
 });
 
 router.delete('/cart/:id',function(req,res) {
@@ -248,8 +248,6 @@ router.get('/carts',function(req,res) {
     res.json(carts)
 
 });
-
-
 
 
 
